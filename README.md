@@ -1,7 +1,8 @@
 Updated-pChart-2
 ================
 
-pChart 2.1.4 updated with changes from dakota/pchart plus some other minor fixes:
+pChart 2.1.4 updated with changes from dakota/pchart plus some other minor fixes.
+
 Changes from dakota repository:
 * Proper php 5.3 "__construct" constructors.
 * Added 'AxisYFont' parameter for drawScale function (array with R, G, B, Alpha, FontName and FontSize parameters)
