@@ -1,7 +1,7 @@
 Updated-pChart-2
 ================
 
-pChart 2.1.4 updated with changes from dakota/pchart plus some other minor fixes.
+pChart 2.1.4 updated with changes from dakota/pchart plus some other minor fixes/changes.
 
 Changes by Guillaume Duwelz-Rebert (added on 2014-04-19):
 * Ability to define plot chart's label orientation
