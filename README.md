@@ -3,6 +3,10 @@ Updated-pChart-2
 
 pChart 2.1.4 updated with changes from dakota/pchart plus some other minor fixes.
 
+Changes by Guillaume Duwelz-Rebert (added on 2014-04-19):
+* Ability to define plot chart's label orientation
+* Image maps now contain both: X and Y axis values and labels
+
 Changes from dakota repository:
 * Proper php 5.3 "__construct" constructors.
 * Added 'AxisYFont' parameter for drawScale function (array with R, G, B, Alpha, FontName and FontSize parameters)
@@ -16,3 +20,4 @@ Other changes:
 * Added 'MaxWidth' parameter to drawBarChart function (specifies maximum bar width)
 * Corrected $SLabelxRotation to $XLabelsRotation in drawScatterScale function
 * Initialized $XLast and $YLast in drawSpline function
+* Fixed undefined variables in getScatterLegendSize() method
