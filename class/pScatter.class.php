@@ -403,7 +403,12 @@
          $SerieX = $Series["X"]; $SerieValuesX = $Data["Series"][$SerieX]["Data"]; $SerieXAxis = $Data["Series"][$SerieX]["Axis"];
          $SerieY = $Series["Y"]; $SerieValuesY = $Data["Series"][$SerieY]["Data"]; $SerieYAxis = $Data["Series"][$SerieY]["Axis"];
 
-         if ( $ImageMapTitle == NULL ) { $Description = $Data["Series"][$Series["X"]]["Description"]." / ".$Data["Series"][$Series["Y"]]["Description"]; } else { $Description = $ImageMapTitle; }
+         if ( $ImageMapTitle == NULL )
+		   $title1 = $Series["Description"];
+		 else
+		   $title1 = $ImageMapTitle;
+
+		 $title2 = $Data["Axis"][1]["Name"];
          
          if ( isset($Series["Picture"]) && $Series["Picture"] != "" )
           { $Picture = $Series["Picture"]; list($PicWidth,$PicHeight,$PicType) = $this->pChartObject->getPicInfo($Picture); }
@@ -423,8 +428,7 @@
 
            if ( $X != VOID && $Y != VOID )
             {
-             $RealValue = round($Data["Series"][$Series["X"]]["Data"][$Key],2)." / ".round($Data["Series"][$Series["Y"]]["Data"][$Key],2);
-             if ( $RecordImageMap ) { $this->pChartObject->addToImageMap("CIRCLE",floor($X).",".floor($Y).",".floor($PlotSize+$BorderSize),$this->pChartObject->toHTMLColor($Series["Color"]["R"],$Series["Color"]["G"],$Series["Color"]["B"]),$Description,$RealValue); }
+             if ( $RecordImageMap ) { $this->pChartObject->addToImageMap("CIRCLE",floor($X).",".floor($Y).",".floor($PlotSize+$BorderSize),$this->pChartObject->toHTMLColor($Series["Color"]["R"],$Series["Color"]["G"],$Series["Color"]["B"]),$title1,$Data["Series"][$Series["X"]]["Data"][$Key],$title2,$Data["Series"][$Series["Y"]]["Data"][$Key]); }
 
              if( isset($Series["Shape"]) )
               { $this->pChartObject->drawShape($X,$Y,$Series["Shape"],$PlotSize,$PlotBorder,$BorderSize,$Series["Color"]["R"],$Series["Color"]["G"],$Series["Color"]["B"],$Series["Color"]["Alpha"],$BorderR,$BorderG,$BorderB,$BorderAlpha); }
@@ -461,7 +465,13 @@
          $Ticks  = $Series["Ticks"];
          $Weight = $Series["Weight"];
 
-         if ( $ImageMapTitle == NULL ) { $Description = $Data["Series"][$Series["X"]]["Description"]." / ".$Data["Series"][$Series["Y"]]["Description"]; } else { $Description = $ImageMapTitle; }
+         if ( $ImageMapTitle == NULL ) 
+		   $title1 = $Series["Description"];
+		 else
+		   $title1 = $ImageMapTitle;
+
+		 $title2 = $Data["Axis"][1]["Name"];
+	 
 
          $PosArrayX = $this->getPosArray($SerieValuesX,$SerieXAxis);
          if ( !is_array($PosArrayX) ) { $Value = $PosArrayX; $PosArrayX = ""; $PosArrayX[0] = $Value; }
@@ -479,8 +489,7 @@
 
            if ( $X != VOID && $Y != VOID )
             {
-             $RealValue = round($Data["Series"][$Series["X"]]["Data"][$Key],2)." / ".round($Data["Series"][$Series["Y"]]["Data"][$Key],2);
-             if ( $RecordImageMap ) { $this->pChartObject->addToImageMap("CIRCLE",floor($X).",".floor($Y).",".$ImageMapPlotSize,$this->pChartObject->toHTMLColor($Series["Color"]["R"],$Series["Color"]["G"],$Series["Color"]["B"]),$Description,$RealValue); }
+             if ( $RecordImageMap ) { $this->pChartObject->addToImageMap("CIRCLE",floor($X).",".floor($Y).",".$ImageMapPlotSize,$this->pChartObject->toHTMLColor($Series["Color"]["R"],$Series["Color"]["G"],$Series["Color"]["B"]),$title1,$Data["Series"][$Series["X"]]["Data"][$Key],$title2,$Data["Series"][$Series["Y"]]["Data"][$Key]); }
             }
 
            if ( $X != VOID && $Y != VOID && $LastX != VOID && $LastY != VOID)
@@ -511,7 +520,12 @@
          $Ticks  = $Series["Ticks"];
          $Weight = $Series["Weight"];
 
-         if ( $ImageMapTitle == NULL ) { $Description = $Data["Series"][$Series["X"]]["Description"]." / ".$Data["Series"][$Series["Y"]]["Description"]; } else { $Description = $ImageMapTitle; }
+         if ( $ImageMapTitle == NULL )
+		   $title1 = $Series["Description"];
+		 else
+		   $title1 = $ImageMapTitle;
+
+		 $title2 = $Data["Axis"][1]["Name"];
 
          $PosArrayX = $this->getPosArray($SerieValuesX,$SerieXAxis);
          if ( !is_array($PosArrayX) ) { $Value = $PosArrayX; $PosArrayX = ""; $PosArrayX[0] = $Value; }
@@ -530,8 +544,7 @@
 
            if ( $X != VOID && $Y != VOID )
             {
-             $RealValue = round($Data["Series"][$Series["X"]]["Data"][$Key],2)." / ".round($Data["Series"][$Series["Y"]]["Data"][$Key],2);
-             if ( $RecordImageMap ) { $this->pChartObject->addToImageMap("CIRCLE",floor($X).",".floor($Y).",".$ImageMapPlotSize,$this->pChartObject->toHTMLColor($Series["Color"]["R"],$Series["Color"]["G"],$Series["Color"]["B"]),$Description,$RealValue); }
+             if ( $RecordImageMap ) { $this->pChartObject->addToImageMap("CIRCLE",floor($X).",".floor($Y).",".$ImageMapPlotSize,$this->pChartObject->toHTMLColor($Series["Color"]["R"],$Series["Color"]["G"],$Series["Color"]["B"]),$title1,$Data["Series"][$Series["X"]]["Data"][$Key],$title2,$Data["Series"][$Series["Y"]]["Data"][$Key]); }
             }
 
            if ( $X != VOID && $Y != VOID )
@@ -752,6 +765,11 @@
      $Margin	= isset($Format["Margin"]) ? $Format["Margin"] : 5;
      $Style	= isset($Format["Style"]) ? $Format["Style"] : LEGEND_ROUND;
      $Mode	= isset($Format["Mode"]) ? $Format["Mode"] : LEGEND_VERTICAL;
+     $BoxWidth		= isset($Format["BoxWidth"]) ? $Format["BoxWidth"] : 5;
+     $BoxHeight		= isset($Format["BoxHeight"]) ? $Format["BoxHeight"] : 5;
+     $IconAreaWidth	= isset($Format["IconAreaWidth"]) ? $Format["IconAreaWidth"] : $BoxWidth;
+     $IconAreaHeight	= isset($Format["IconAreaHeight"]) ? $Format["IconAreaHeight"] : $BoxHeight;
+     $XSpacing		= isset($Format["XSpacing"]) ? $Format["XSpacing"] : 5;
 
      $YStep = max($this->pChartObject->FontSize,$BoxSize) + 5;
      $XStep = $BoxSize + 5;

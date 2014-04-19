@@ -190,7 +190,7 @@
 
            if ( $Shape == BUBBLE_SHAPE_SQUARE )
             {
-             if ( $RecordImageMap ) { $this->pChartObject->addToImageMap("RECT",floor($X-$CircleRadius).",".floor($Y-$CircleRadius).",".floor($X+$CircleRadius).",".floor($Y+$CircleRadius),$this->pChartObject->toHTMLColor($Palette[$Key]["R"],$Palette[$Key]["G"],$Palette[$Key]["B"]),$SerieDescription,$Data["Series"][$WeightSeries[$Key]]["Data"][$iKey]); }
+             if ( $RecordImageMap ) { $this->pChartObject->addToImageMap("RECT",floor($X-$CircleRadius).",".floor($Y-$CircleRadius).",".floor($X+$CircleRadius).",".floor($Y+$CircleRadius),$this->pChartObject->toHTMLColor($Palette[$Key]["R"],$Palette[$Key]["G"],$Palette[$Key]["B"]),$SerieDescription,$Data["Series"][$WeightSeries[$Key]]["Data"][$iKey], $Data["Abscissa"], $Data["Series"][$Data["Abscissa"]]["Data"][$iKey]); }
 
              if ( $BorderWidth != 1 )
               {
@@ -202,7 +202,7 @@
             }
            elseif ( $Shape == BUBBLE_SHAPE_ROUND )
             {
-             if ( $RecordImageMap ) { $this->pChartObject->addToImageMap("CIRCLE",floor($X).",".floor($Y).",".floor($CircleRadius),$this->pChartObject->toHTMLColor($Palette[$Key]["R"],$Palette[$Key]["G"],$Palette[$Key]["B"]),$SerieDescription,$Data["Series"][$WeightSeries[$Key]]["Data"][$iKey]); }
+             if ( $RecordImageMap ) { $this->pChartObject->addToImageMap("CIRCLE",floor($X).",".floor($Y).",".floor($CircleRadius),$this->pChartObject->toHTMLColor($Palette[$Key]["R"],$Palette[$Key]["G"],$Palette[$Key]["B"]),$SerieDescription,$Data["Series"][$WeightSeries[$Key]]["Data"][$iKey], $Data["Abscissa"], $Data["Series"][$Data["Abscissa"]]["Data"][$iKey]); }
 
              if ( $BorderWidth != 1 )
               {
@@ -222,7 +222,7 @@
 
            if ( $Shape == BUBBLE_SHAPE_SQUARE )
             {
-             if ( $RecordImageMap ) { $this->pChartObject->addToImageMap("RECT",floor($X-$CircleRadius).",".floor($Y-$CircleRadius).",".floor($X+$CircleRadius).",".floor($Y+$CircleRadius),$this->pChartObject->toHTMLColor($Palette[$Key]["R"],$Palette[$Key]["G"],$Palette[$Key]["B"]),$SerieDescription,$Data["Series"][$WeightSeries[$Key]]["Data"][$iKey]); }
+             if ( $RecordImageMap ) { $this->pChartObject->addToImageMap("RECT",floor($X-$CircleRadius).",".floor($Y-$CircleRadius).",".floor($X+$CircleRadius).",".floor($Y+$CircleRadius),$this->pChartObject->toHTMLColor($Palette[$Key]["R"],$Palette[$Key]["G"],$Palette[$Key]["B"]),$SerieDescription,$Data["Series"][$WeightSeries[$Key]]["Data"][$iKey], $Data["Abscissa"], $Data["Series"][$Data["Abscissa"]]["Data"][$iKey]); }
 
              if ( $BorderWidth != 1 )
               {
@@ -234,7 +234,7 @@
             }
            elseif ( $Shape == BUBBLE_SHAPE_ROUND )
             {
-             if ( $RecordImageMap ) { $this->pChartObject->addToImageMap("CIRCLE",floor($X).",".floor($Y).",".floor($CircleRadius),$this->pChartObject->toHTMLColor($Palette[$Key]["R"],$Palette[$Key]["G"],$Palette[$Key]["B"]),$SerieDescription,$Data["Series"][$WeightSeries[$Key]]["Data"][$iKey]); }
+             if ( $RecordImageMap ) { $this->pChartObject->addToImageMap("CIRCLE",floor($X).",".floor($Y).",".floor($CircleRadius),$this->pChartObject->toHTMLColor($Palette[$Key]["R"],$Palette[$Key]["G"],$Palette[$Key]["B"]),$SerieDescription,$Data["Series"][$WeightSeries[$Key]]["Data"][$iKey], $Data["Abscissa"], $Data["Series"][$Data["Abscissa"]]["Data"][$iKey]); }
 
              if ( $BorderWidth != 1 )
               {

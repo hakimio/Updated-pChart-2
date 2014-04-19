@@ -147,14 +147,14 @@
            $this->pChartObject->drawLine($X-$ExtremityLength,$PosArray[2],$X+$ExtremityLength,$PosArray[2],$ExtremitySettings);
            $this->pChartObject->drawLine($X-$ExtremityLength,$PosArray[3],$X+$ExtremityLength,$PosArray[3],$ExtremitySettings);
 
-           if ( $RecordImageMap ) { $this->pChartObject->addToImageMap("RECT",floor($X-$ExtremityLength).",".floor($PosArray[2]).",".floor($X+$ExtremityLength).",".floor($PosArray[3]),$ImageMapColor,$ImageMapTitle,$Values); }
+           if ( $RecordImageMap ) { $this->pChartObject->addToImageMap("RECT",floor($X-$ExtremityLength).",".floor($PosArray[2]).",".floor($X+$ExtremityLength).",".floor($PosArray[3]),$ImageMapColor,$ImageMapTitle,$Values, $Data["Abscissa"], $Data["Series"][$Data["Abscissa"]]["Data"][$Key]); }
           }
          else
           {
            $this->pChartObject->drawFilledRectangle($X-$ExtremityLength,$PosArray[2],$X+$ExtremityLength,$PosArray[2]-$ExtremityWidth,$ExtremitySettings);
            $this->pChartObject->drawFilledRectangle($X-$ExtremityLength,$PosArray[3],$X+$ExtremityLength,$PosArray[3]+$ExtremityWidth,$ExtremitySettings);
 
-           if ( $RecordImageMap ) { $this->pChartObject->addToImageMap("RECT",floor($X-$ExtremityLength).",".floor($PosArray[2]-$ExtremityWidth).",".floor($X+$ExtremityLength).",".floor($PosArray[3]+$ExtremityWidth),$ImageMapColor,$ImageMapTitle,$Values); }
+           if ( $RecordImageMap ) { $this->pChartObject->addToImageMap("RECT",floor($X-$ExtremityLength).",".floor($PosArray[2]-$ExtremityWidth).",".floor($X+$ExtremityLength).",".floor($PosArray[3]+$ExtremityWidth),$ImageMapColor,$ImageMapTitle,$Values, $Data["Abscissa"], $Data["Series"][$Data["Abscissa"]]["Data"][$Key]); }
           }
 
          if ( $ShadowOnBoxesOnly ) { $this->pChartObject->Shadow = $RestoreShadow; }
@@ -188,14 +188,14 @@
            $this->pChartObject->drawLine($PosArray[2],$Y-$ExtremityLength,$PosArray[2],$Y+$ExtremityLength,$ExtremitySettings);
            $this->pChartObject->drawLine($PosArray[3],$Y-$ExtremityLength,$PosArray[3],$Y+$ExtremityLength,$ExtremitySettings);
 
-           if ( $RecordImageMap ) { $this->pChartObject->addToImageMap("RECT",floor($PosArray[2]).",".floor($Y-$ExtremityLength).",".floor($PosArray[3]).",".floor($Y+$ExtremityLength),$ImageMapColor,$ImageMapTitle,$Values); }
+           if ( $RecordImageMap ) { $this->pChartObject->addToImageMap("RECT",floor($PosArray[2]).",".floor($Y-$ExtremityLength).",".floor($PosArray[3]).",".floor($Y+$ExtremityLength),$ImageMapColor,$ImageMapTitle,$Values, $Data["Abscissa"], $Data["Series"][$Data["Abscissa"]]["Data"][$Key]); }
           }
          else
           {
            $this->pChartObject->drawFilledRectangle($PosArray[2],$Y-$ExtremityLength,$PosArray[2]-$ExtremityWidth,$Y+$ExtremityLength,$ExtremitySettings);
            $this->pChartObject->drawFilledRectangle($PosArray[3],$Y-$ExtremityLength,$PosArray[3]+$ExtremityWidth,$Y+$ExtremityLength,$ExtremitySettings);
 
-           if ( $RecordImageMap ) { $this->pChartObject->addToImageMap("RECT",floor($PosArray[2]-$ExtremityWidth).",".floor($Y-$ExtremityLength).",".floor($PosArray[3]+$ExtremityWidth).",".floor($Y+$ExtremityLength),$ImageMapColor,$ImageMapTitle,$Values); }
+           if ( $RecordImageMap ) { $this->pChartObject->addToImageMap("RECT",floor($PosArray[2]-$ExtremityWidth).",".floor($Y-$ExtremityLength).",".floor($PosArray[3]+$ExtremityWidth).",".floor($Y+$ExtremityLength),$ImageMapColor,$ImageMapTitle,$Values, $Data["Abscissa"], $Data["Series"][$Data["Abscissa"]]["Data"][$Key]); }
           }
 
          if ( $ShadowOnBoxesOnly ) { $this->pChartObject->Shadow = $RestoreShadow; }

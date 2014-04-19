@@ -257,29 +257,35 @@
     }
 
    /* Add a zone to the image map */
-   function addToImageMap($Type,$Plots,$Color=NULL,$Title=NULL,$Message=NULL,$HTMLEncode=FALSE)
+   function addToImageMap($Type,$Plots,$Color=NULL,$Title1=NULL,$Message1=NULL,$Title2=NULL,$Message2=NULL,$HTMLEncode=FALSE)
     {
      if ( $this->ImageMapStorageMode == NULL ) { $this->initialiseImageMap(); }
 
      /* Encode the characters in the imagemap in HTML standards */
-     $Title   = str_replace("&#8364;","\u20AC",$Title);
-     $Title   = htmlentities($Title,ENT_QUOTES,"ISO-8859-15");
+     $Title1   = str_replace("&#8364;","\u20AC",$Title1);
+     $Title1   = htmlentities($Title1,ENT_QUOTES,"ISO-8859-15");
+	 $Title2   = str_replace("&#8364;","\u20AC",$Title2);
+     $Title2   = htmlentities($Title2,ENT_QUOTES,"ISO-8859-15");
      if ( $HTMLEncode )
       {
-       $Message = htmlentities($Message,ENT_QUOTES,"ISO-8859-15");
-       $Message = str_replace("&lt;","<",$Message);
-       $Message = str_replace("&gt;",">",$Message);
+       $Message1 = htmlentities($Message1,ENT_QUOTES,"ISO-8859-15");
+       $Message1 = str_replace("&lt;","<",$Message1);
+       $Message1 = str_replace("&gt;",">",$Message1);
+       
+       $Message2 = htmlentities($Message2,ENT_QUOTES,"ISO-8859-15");
+       $Message2 = str_replace("&lt;","<",$Message2);
+       $Message2 = str_replace("&gt;",">",$Message2);
       }
 
      if ( $this->ImageMapStorageMode == IMAGE_MAP_STORAGE_SESSION )
       {
        if(!isset($_SESSION)) { $this->initialiseImageMap(); }
-       $_SESSION[$this->ImageMapIndex][] = array($Type,$Plots,$Color,$Title,$Message);
+       $_SESSION[$this->ImageMapIndex][] = array($Type,$Plots,$Color,$Title1,$Message1,$Title2,$Message2);
       }
      elseif($this->ImageMapStorageMode == IMAGE_MAP_STORAGE_FILE)
       {
        $Handle = fopen($this->ImageMapStorageFolder."/".$this->ImageMapFileName.".map", 'a');
-       fwrite($Handle, $Type.IMAGE_MAP_DELIMITER.$Plots.IMAGE_MAP_DELIMITER.$Color.IMAGE_MAP_DELIMITER.$Title.IMAGE_MAP_DELIMITER.$Message."\r\n");
+       fwrite($Handle, $Type.IMAGE_MAP_DELIMITER.$Plots.IMAGE_MAP_DELIMITER.$Color.IMAGE_MAP_DELIMITER.$Title1.IMAGE_MAP_DELIMITER.$Message1.IMAGE_MAP_DELIMITER.$Title2.IMAGE_MAP_DELIMITER.$Message2."\r\n");
        fclose($Handle);
       }
     }

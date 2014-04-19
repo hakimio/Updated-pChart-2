@@ -32,98 +32,103 @@
  var SmoothMove			= false;
  var SmoothMoveFactor		= 5;
  var imageMapRandomSeed		= true;
- var delimiter			= String.fromCharCode(1);
+ var delimiter			= String.fromCharCode( 1 );
 
  /* Create an image map */
- function createMap(imageMapID)
-  {
-   var testMAP = document.getElementById(imageMapID);
-   if ( testMAP != null ) { testMAP.parentNode.removeChild(testMAP); }
+ function createMap ( imageMapID ) {
+   var testMAP = document.getElementById( imageMapID );
+   if ( testMAP != null ) {
+     testMAP.parentNode.removeChild( testMAP );
+   }
 
-   var element = document.createElement("MAP");
+   var element = document.createElement( "MAP" );
 
    element.id   = imageMapID;
    element.name = imageMapID;
-   document.body.appendChild(element);
-  }
+   document.body.appendChild( element );
+ }
 
  /* Create the tooltip div */
- function createTooltipDiv(TooltipDivID)
-  {
-   var testDiv = document.getElementById(TooltipDivID);
-   if ( testDiv != null ) { return(0); }
+ function createTooltipDiv ( TooltipDivID ) {
+   var testDiv = document.getElementById( TooltipDivID );
+   if ( testDiv != null ) {
+     return( 0 );
+   }
 
-   var element = document.createElement("DIV");
+   var element = document.createElement( "DIV" );
 
    element.id             = TooltipDivID;
    element.innerHTML      = "";
-   element.style.display = "inline-block";
+   element.style.display  = "inline-block";
    element.style.position = "absolute";
    element.style.opacity  = 0;
    element.style.filter   = "alpha(opacity=0)";
 
-   document.body.appendChild(element);
-  }
+   document.body.appendChild( element );
+ }
 
  /* Hide the tooltip */
- function hideDiv(TooltipDivID)
-  {
-   var element = document.getElementById(TooltipDivID);
+ function hideDiv ( TooltipDivID ) {
+   var element = document.getElementById( TooltipDivID );
 
-   fadeOut(TooltipDivID);
-  }
+   fadeOut( TooltipDivID );
+ }
 
  /* Show the tooltip */
- function showDiv(TooltipDivID,Color,Title,Message)
-  {
-   var element = document.getElementById(TooltipDivID);
+ function showDiv( TooltipDivID, Color, Title, Message ) {
+   var element = document.getElementById( TooltipDivID );
 
-   if ( currentTooltipDivID != TooltipDivID || currentTitle != Title || currentMessage != Message)
-    { createToolTip(TooltipDivID,Color,Title,Message); } 
-
-   if ( !initialized ) { moveDiv(TooltipDivID); initialized = true; }
-
-   fadeIn(TooltipDivID);
+   if ( currentTooltipDivID != TooltipDivID || currentTitle != Title || currentMessage != Message ) { 
+     createToolTip( TooltipDivID, Color, Title, Message );
+   }
+      
+   if ( !initialized ) { 
+     moveDiv( TooltipDivID ); 
+     initialized = true;
+   }
+   fadeIn( TooltipDivID );
 
    currentTooltipDivID	= TooltipDivID;
    currentTitle		= Title;
    currentMessage	= Message;
-  }
-
- /* Move the div to the mouse location */
- function moveDiv(TooltipDivID)
-  {
-   var element = document.getElementById(TooltipDivID);
-
-   
-if(self.pageYOffset)
-    { rX = self.pageXOffset; rY = self.pageYOffset; }
-   
-else if(document.documentElement && document.documentElement.scrollTop)
-    { rX = document.documentElement.scrollLeft; rY = document.documentElement.scrollTop; }
-   
-else if(document.body)
-    { rX = document.body.scrollLeft; rY = document.body.scrollTop; }
-   
-if(document.all)
-    {
- cX += rX; cY += rY;
  }
 
-   if ( SmoothMove && LastcX != null )
-    { cX = LastcX - (LastcX-cX)/4; cY = LastcY - (LastcY-cY)/SmoothMoveFactor; }
+ /* Move the div to the mouse location */
+ function moveDiv ( TooltipDivID ) {
+   var element = document.getElementById( TooltipDivID );
+   
+   if ( self.pageYOffset ) { 
+     rX = self.pageXOffset; 
+     rY = self.pageYOffset;
+   }
+   else if ( document.documentElement && document.documentElement.scrollTop ) {
+     rX = document.documentElement.scrollLeft; 
+     rY = document.documentElement.scrollTop;
+   }
+   else if ( document.body ) {
+     rX = document.body.scrollLeft; 
+     rY = document.body.scrollTop;
+   }
+   
+   if( document.all ) {
+     cX += rX; 
+     cY += rY;
+   }
 
-   element.style.left    = (cX+10) + "px";
+   if ( SmoothMove && LastcX != null ) {
+     cX = LastcX - ( LastcX - cX ) / 4; 
+     cY = LastcY - ( LastcY - cY ) / SmoothMoveFactor;
+   }
 
-   element.style.top     = (cY+10) + "px";
-
-   LastcX = cX; LastcY = cY;
+   element.style.left = ( cX + 10 ) + "px";
+   element.style.top = ( cY + 10 ) + "px";
+   LastcX = cX; 
+   LastcY = cY;
   }
 
  /* Compute the tooltip HTML code */
- function createToolTip(TooltipDivID,Color,Title,Message)
-  {
-   var element = document.getElementById(TooltipDivID);
+ function createToolTip ( TooltipDivID, Color, Title, Message ) {
+   var element = document.getElementById( TooltipDivID );
 
    var HTML = "<div style='border:2px solid #606060'><div style='background-color: #000000; font-family: tahoma; font-size: 11px; color: #ffffff; padding: 4px;'><b>"+Title+" &nbsp;</b></div>";
    HTML    += "<div style='background-color: #808080; border-top: 2px solid #606060; font-family: tahoma; font-size: 10px; color: #ffffff; padding: 2px;'>";
@@ -131,134 +136,185 @@ if(document.all)
    HTML    += "</div></div>";
 
    element.innerHTML = HTML;
-  }
+ }
 
  /* Bind an image map to a picture */
- function bindMap(imageID,imageMapID)
-  {
-   var image = document.getElementById(imageID);
+ function bindMap ( imageID, imageMapID ) {
+   var image = document.getElementById( imageID );
    image.useMap = "#"+imageMapID;
-  }
+ }
 
  /* Add an area to the specified image map */
- function addArea(imageMapID,shapeType,coordsList,actionOver,actionOut)
-  {
-   var maps    = document.getElementById(imageMapID);
-   var element = document.createElement("AREA");
+ function addArea (  imageMapID, shapeType, coordsList, actionOver, actionOut, message1, value1, message2, value2, LinkURL ) {
+   var maps    = document.getElementById( imageMapID );
+   var element = document.createElement( "AREA" );
 
    element.shape  = shapeType;
    element.coords = coordsList;
-   element.onmouseover = function() { eval(actionOver); };
-   element.onmouseout  = function() { eval(actionOut); };
-   maps.appendChild(element);
-  }
+   if ( LinkURL != '' ) {
+     element.href = LinkURL+'?message1='+message1+'&value1='+value1+'&message2='+message2+'&value2='+value2;
+   }
+   element.onmouseover = function() { 
+     eval( actionOver );
+   };
+   element.onmouseout  = function() {
+     eval( actionOut );
+   };
+   maps.appendChild( element );
+ }
 
  /* Retrieve the current cursor position Mozilla */
- function UpdateCursorPosition(e)
-  {
-   cX = e.pageX; cY = e.pageY;
-   if ( currentStatus || timerID != null ) { moveDiv(currentTooltipDivID); }
-  }
-
+ function UpdateCursorPosition ( e ) {
+   cX = e.pageX; 
+   cY = e.pageY;
+   if ( currentStatus || timerID != null ) {
+     moveDiv( currentTooltipDivID );
+   }
+ }
 
  /* Retrieve the current cursor position IE */
- function UpdateCursorPositionDocAll(e)
-  {
-   cX = event.clientX; cY = event.clientY;
-   if ( currentStatus || timerID != null ) { moveDiv(currentTooltipDivID); }
-  }
+ function UpdateCursorPositionDocAll ( e ) {
+   cX = event.clientX; 
+   cY = event.clientY;
+   if ( currentStatus || timerID != null ) { 
+     moveDiv( currentTooltipDivID );
+   }
+ }
 
  /* Fade general functions */
- function fadeIn(TooltipDivID)  { currentTimerMode = 1; initialiseTimer(TooltipDivID); } function fadeOut(TooltipDivID) { currentTimerMode = 2; initialiseTimer(TooltipDivID); } function initialiseTimer(TooltipDivID)
-  { if ( timerID == null ) { timerID = setInterval("fade('"+TooltipDivID+"')",timerInterval); } }
-
-
+ function fadeIn ( TooltipDivID ) {
+   currentTimerMode = 1; 
+   initialiseTimer( TooltipDivID );
+ }
+ 
+ function fadeOut( TooltipDivID ) { 
+   currentTimerMode = 2; 
+   initialiseTimer( TooltipDivID );
+ }
+ 
+ function initialiseTimer( TooltipDivID ) { 
+   if ( timerID == null ) { 
+     timerID = setInterval( "fade( '"+TooltipDivID+"' )", timerInterval );
+   }
+ }
 
  /* Handle fading */
- function fade(TooltipDivID)
-  {
+ function fade( TooltipDivID ) {
    var element = document.getElementById(TooltipDivID);
 
    currentStatus = true;
-   if ( currentTimerMode == 1 ) /* Fade in */
-    {
+   if ( currentTimerMode == 1 ) { /* Fade in */
      currentAlpha = currentAlpha + timerStep;
-     if ( currentAlpha >= 100 ) { currentAlpha = 100; clearInterval(timerID); timerID = null; }
-    }
-   else if ( currentTimerMode == 2 ) /* Fade out */
-    {
+     if ( currentAlpha >= 100 ) { 
+       currentAlpha = 100; 
+       clearInterval( timerID );
+       timerID = null;
+     }
+   }
+   else if ( currentTimerMode == 2 ) { /* Fade out */
      currentAlpha = currentAlpha - timerStep;
-     if ( currentAlpha <= 0 ) { currentStatus = false; currentAlpha = 0; clearInterval(timerID); timerID = null; }
-    }
+     if ( currentAlpha <= 0 ) { 
+       currentStatus = false; 
+       currentAlpha = 0; 
+       clearInterval( timerID );
+       timerID = null;
+     }
+   }
 
    element.style.opacity = currentAlpha * .01;
    element.style.filter = 'alpha(opacity=' +currentAlpha + ')';
-  }
+ }
 
  /* Add a picture element that need ImageMap parsing */
- function addImage(PictureID,ImageMapID,ImageMapURL)
-  {
-   createTooltipDiv('testDiv');
-   createMap(ImageMapID);
-   bindMap(PictureID,ImageMapID);
-
-   setTimeout("checkLoadingStatus('"+PictureID+"','"+ImageMapID+"','"+ImageMapURL+"')", 200);   
-  }
+ function addImage ( PictureID, ImageMapID, ImageMapURL, LinkURL = '' ) {
+   createTooltipDiv( 'testDiv' );
+   createMap( ImageMapID );
+   bindMap( PictureID, ImageMapID );
+   
+   setTimeout( "checkLoadingStatus( '"+PictureID+"', '"+ImageMapID+"', '"+ImageMapURL+"', '"+LinkURL+"' )", 200 );
+ }
 
  /* Check the loading status of the image */
- function checkLoadingStatus(PictureID,ImageMapID,ImageMapURL)
-  {
-   var element = document.getElementById(PictureID);
+ function checkLoadingStatus ( PictureID, ImageMapID, ImageMapURL, LinkURL ) {
+   var element = document.getElementById( PictureID );
 
-   if ( element.complete == true )
-    downloadImageMap(PictureID,ImageMapID,ImageMapURL);
-   else
-    setTimeout("checkLoadingStatus('"+PictureID+"','"+ImageMapID+"','"+ImageMapURL+"')", 200);
-  }
+   if ( element.complete == true ) {
+     downloadImageMap( PictureID, ImageMapID, ImageMapURL, LinkURL );
+   }
+   else {
+     setTimeout( "checkLoadingStatus( '"+PictureID+"', '"+ImageMapID+"', '"+ImageMapURL+"', '"+LinkURL+"' )", 200 );
+   }
+ }
 
  /* Download the image map when the picture is loaded */
- function downloadImageMap(PictureID,ImageMapID,ImageMapURL)
-  {
+ function downloadImageMap ( PictureID, ImageMapID, ImageMapURL, LinkURL ) {
    var xmlhttp=false;   
    /*@cc_on @*/  
-   /*@if (@_jscript_version >= 5)  
-    try { xmlhttp = new ActiveXObject("Msxml2.XMLHTTP"); } catch (e) { try { xmlhttp = new ActiveXObject("Microsoft.XMLHTTP"); } catch (E) { xmlhttp = false; } }  
-   @end @*/  
-  
-   if (!xmlhttp && typeof XMLHttpRequest!='undefined')   
-    { try { xmlhttp = new XMLHttpRequest(); } catch (e) { xmlhttp=false; } }   
-  
-   if (!xmlhttp && window.createRequest)   
-    { try { xmlhttp = window.createRequest(); } catch (e) { xmlhttp=false; } }   
-  
-   if ( imageMapRandomSeed )
-    {
-     randomSeed = "Seed=" + Math.floor(Math.random()*1000);
-     if ( ImageMapURL.indexOf("?",0) != -1 ) { ImageMapURL = ImageMapURL + "&" + randomSeed; } else { ImageMapURL = ImageMapURL + "?" + randomSeed; }
+   /*@if ( @_jscript_version >= 5 )  
+    try { 
+      xmlhttp = new ActiveXObject( "Msxml2.XMLHTTP" );
     }
+    catch (e) { 
+      try { 
+        xmlhttp = new ActiveXObject( "Microsoft.XMLHTTP" );
+      }
+      catch ( E ) {
+        xmlhttp = false;
+      }
+    }  
+    @end @*/  
+  
+   if ( ! xmlhttp && typeof XMLHttpRequest != 'undefined' ) { 
+     try { 
+       xmlhttp = new XMLHttpRequest();
+     } 
+     catch( e ) {
+       xmlhttp = false;
+     }
+   }
+  
+   if ( ! xmlhttp && window.createRequest ) {
+     try {
+       xmlhttp = window.createRequest();
+     }
+     catch( e ) {
+       xmlhttp = false;
+     }
+   }
+  
+   if ( imageMapRandomSeed ) {
+     randomSeed = "Seed=" + Math.floor( Math.random() * 1000 );
+     if ( ImageMapURL.indexOf( "?", 0 ) != -1 ) {
+       ImageMapURL = ImageMapURL + "&" + randomSeed;
+     }
+     else {
+       ImageMapURL = ImageMapURL + "?" + randomSeed;
+     }
+   }
 
-   xmlhttp.open("GET", ImageMapURL,true);
-
-   xmlhttp.onreadystatechange=function()
-    { if (xmlhttp.readyState==4) { parseZones(ImageMapID,xmlhttp.responseText); } }   
-   xmlhttp.send(null)   
-  }
+   xmlhttp.open( "GET", ImageMapURL, true );
+   xmlhttp.onreadystatechange = function() {
+     if ( xmlhttp.readyState == 4 ) {
+       parseZones( ImageMapID, xmlhttp.responseText, LinkURL );
+     }
+   }   
+   xmlhttp.send( null );
+ }
 
  /* Process the image map & create the zones */
- function parseZones(ImageMapID,SerializedZones)
-  {
-   var Zones = SerializedZones.split("\r\n");
+ function parseZones ( ImageMapID, SerializedZones, LinkURL ) {
+   var Zones = SerializedZones.split( "\r\n" );
 
-   for(i=0;i<=Zones.length-2;i++)
-    {
-     var Options = Zones[i].split(delimiter);
-     addArea(ImageMapID,Options[0],Options[1],'showDiv("testDiv","'+Options[2]+'","'+Options[3]+'","'+Options[4].replace('"','')+'");','hideDiv("testDiv");');
-    }
-  }
+   for ( i=0 ; i<=Zones.length - 2 ; i++ ) {
+     var Options = Zones[i].split( delimiter );
+     addArea( ImageMapID, Options[0], Options[1], 'showDiv( "testDiv", "'+Options[2]+'", "'+Options[3]+'", "'+Options[4].replace( '"', '' )+'", "'+Options[5]+'", "'+Options[6]+'");', 'hideDiv( "testDiv" );', Options[3], Options[4], Options[5], Options[6], LinkURL );
+   }
+ }
 
  /* Attach the onMouseMove() event to the document body */
- if(document.all)
-  { document.onmousemove = UpdateCursorPositionDocAll; }
-
- else
-  { document.onmousemove = UpdateCursorPosition; }
+ if ( document.all ) {
+   document.onmousemove = UpdateCursorPositionDocAll;
+ }
+ else {
+   document.onmousemove = UpdateCursorPosition;
+ }
